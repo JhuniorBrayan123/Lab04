@@ -238,6 +238,171 @@ fun ConstraintLayoutDemo() {
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ScaffoldDemo() {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("Scaffold", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Estructura básica de pantalla con TopBar, Content, FAB")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Box(modifier = Modifier.height(200.dp)) {
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            title = { Text("Mi App") },
+                            colors = TopAppBarDefaults.topAppBarColors(
+                                containerColor = MaterialTheme.colorScheme.primary,
+                                titleContentColor = MaterialTheme.colorScheme.onPrimary
+                            )
+                        )
+                    },
+                    floatingActionButton = {
+                        FloatingActionButton(onClick = {}) {
+                            Icon(Icons.Default.Add, contentDescription = "Agregar")
+                        }
+                    }
+                ) { paddingValues ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("Contenido principal")
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SurfaceDemo() {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("Surface", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Superficie con elevación y forma personalizable")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Surface(
+                    modifier = Modifier.size(80.dp),
+                    color = Color(0xFFFFB74D),
+                    shadowElevation = 4.dp
+                ) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("Surface 1")
+                    }
+                }
+
+                Surface(
+                    modifier = Modifier.size(80.dp),
+                    color = Color(0xFF81C784),
+                    shadowElevation = 8.dp
+                ) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("Surface 2")
+                    }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ChipDemo() {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("Chip", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Elementos compactos para filtros, acciones o información")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                AssistChip(
+                    onClick = {},
+                    label = { Text("Asistente") }
+                )
+                FilterChip(
+                    selected = true,
+                    onClick = {},
+                    label = { Text("Filtro") }
+                )
+                SuggestionChip(
+                    onClick = {},
+                    label = { Text("Sugerencia") }
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun FlowRowDemo() {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("FlowRow", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Fila que se ajusta automáticamente creando nuevas líneas")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                repeat(8) { index ->
+                    Button(
+                        onClick = {},
+                        modifier = Modifier.padding(2.dp)
+                    ) {
+                        Text("Botón $index")
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Faltaba el composable FlowColumnDemo, lo he añadido para que el código esté completo
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun FlowColumnDemo() {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("FlowColumn", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Columna que se ajusta automáticamente creando nuevas columnas")
+            Spacer(modifier = Modifier.height(8.dp))
+            FlowColumn(
+                modifier = Modifier.height(150.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                repeat(8) { index ->
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFFC5CAE9))
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                        ) {
+                            Text("Item $index")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
