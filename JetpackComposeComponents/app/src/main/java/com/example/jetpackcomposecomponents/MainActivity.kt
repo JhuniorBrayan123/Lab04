@@ -282,9 +282,9 @@ fun ScaffoldDemo() {
 fun SurfaceDemo() {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text("Surface", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Surface", fontWeight = FontWeight.Bold, fontSize = 8.sp)
             Text("Superficie con elevación y forma personalizable")
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(4.dp))
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Surface(
