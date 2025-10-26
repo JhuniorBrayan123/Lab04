@@ -98,6 +98,145 @@ fun ContainersSection() {
     }
 }
 
+@Composable
+fun LazyColumnDemo() {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("LazyColumn", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Lista vertical optimizada para grandes conjuntos de datos")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            LazyColumn(
+                modifier = Modifier.height(150.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                items(20) { index ->
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFFE3F2FD))
+                    ) {
+                        Text(
+                            "Item $index",
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun LazyRowDemo() {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("LazyRow", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Lista horizontal optimizada para desplazamiento lateral")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(10) { index ->
+                    Card(
+                        modifier = Modifier.size(100.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFFF3E5F5))
+                    ) {
+                        Box(
+                            modifier = Modifier.fillMaxSize(), // Rellenar el Card
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("$index", fontSize = 20.sp)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun GridDemo() {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("LazyVerticalGrid", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Grilla vertical con múltiples columnas")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(3),
+                modifier = Modifier.height(120.dp),
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                items(12) { index ->
+                    Card(
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F5E8))
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(8.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("$index")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ConstraintLayoutDemo() {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("ConstraintLayout", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            Text("Layout con restricciones entre elementos")
+            Spacer(modifier = Modifier.height(8.dp))
+
+            ConstraintLayout(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(120.dp)
+            ) {
+                // Se utiliza createRefs() del scope de ConstraintLayout
+                val (button1, button2, text) = createRefs()
+
+                Button(
+                    onClick = {},
+                    modifier = Modifier.constrainAs(button1) {
+                        top.linkTo(parent.top)
+                        start.linkTo(parent.start)
+                    }
+                ) {
+                    Text("Inicio")
+                }
+
+                Button(
+                    onClick = {},
+                    modifier = Modifier.constrainAs(button2) {
+                        top.linkTo(parent.top)
+                        end.linkTo(parent.end)
+                    }
+                ) {
+                    Text("Final")
+                }
+
+                Text(
+                    "Centrado",
+                    modifier = Modifier.constrainAs(text) {
+                        top.linkTo(button1.bottom, margin = 16.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                        bottom.linkTo(parent.bottom)
+                    }
+                )
+            }
+        }
+    }
+}
+
 
 @Preview(showBackground = true)
 @Composable
